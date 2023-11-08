@@ -1,0 +1,5 @@
+-- Databricks notebook source
+-- MAGIC %md
+-- MAGIC --Data stream 
+-- MAGIC any data source that grows 
+-- MAGIC

@@ -1,0 +1,19 @@
+Data Ingestion using Auto Loader : 
+
+allows you to incrementally process new files as they land and clound storage while being extremeky cost effiective at the same time. It can ingest Json, csv, parquet and other file formats 
+
+
+What is the main difference between AUTO LOADER  and COPY INTO?
+
+--Auto loader supports file motification when performing incremental loads.
+
+
+Explanation
+Auto loader supports both directory listing and file notification but COPY INTO only supports directory listing.
+
+
+
+Auto loader file notification will automatically set up a notification service and queue service that subscribe to file events from the input directory in cloud object storage like Azure blob storage or S3. File notification mode is more performant and scalable for large input directories or a high volume of files.
+
+
+--Schema location is used to store schema inferred by AUTO LOADER, so the next time AUTO LOADER runs faster as does not need to infer the schema every single time by trying to use the last known schema.

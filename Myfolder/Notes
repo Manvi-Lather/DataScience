@@ -1,0 +1,17 @@
+Control Plane: Stored in Databricks Cloud Account
+
+
+
+The control plane includes the backend services that Databricks manages in its own Azure account. Notebook commands and many other workspace configurations are stored in the control plane and encrypted at rest.
+
+Data Plane:  Stored in Customer Cloud Account
+
+
+
+The data plane is managed by your Azure account and is where your data resides. This is also where data is processed. You can use Azure Databricks connectors so that your clusters can connect to external data sources outside of your Azure account to ingest data or for storage
+
+
+job cluster : When you run a job scheduler with option of creating a new cluster when the job is complete it terminates the cluster. You cannot restart a job cluster.
+
+
+Delta lake uses open-source, open format, optimized cloud storage ans scalable meta data 
