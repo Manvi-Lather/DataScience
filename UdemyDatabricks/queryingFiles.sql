@@ -19,7 +19,7 @@
 -- MAGIC
 -- MAGIC --works well with self describing format that have well defined schema like JSON and Parquet. 
 -- MAGIC
--- MAGIC --it does not work well with non self decribing formats like csv tsv 
+-- MAGIC --it does not work well with non self decribing formats like csv 
 -- MAGIC
 -- MAGIC --for path we can give : 1. single file , multiple file and complete directory(all of the files should have same format and schema)
 -- MAGIC
@@ -50,7 +50,7 @@
 -- MAGIC
 -- MAGIC   --solution for csv files
 -- MAGIC
--- MAGIC --REgistering tables on external data sources
+-- MAGIC --Registering tables on external data sources
 -- MAGIC
 -- MAGIC     --create table table_name 
 -- MAGIC     --(col_1, col_2)
@@ -60,7 +60,7 @@
 -- MAGIC
 -- MAGIC
 -- MAGIC   --External tables
--- MAGIC   --these files are kept in ots original format, which means no Delta tables
+-- MAGIC   --these files are kept in its original format, which means no Delta tables
 -- MAGIC   --these tables are just a refrence to the files 
 -- MAGIC   --no data moving during table creation . We are just pointing to files stored in an external location 
 -- MAGIC
@@ -86,13 +86,13 @@
 -- MAGIC
 -- MAGIC --limitations : 
 -- MAGIC
--- MAGIC     -- no delta table 
--- MAGIC     --we can not expect the perfromance guarantees associated with delta lake and lakehouse 
+-- MAGIC     -- it's no delta table 
+-- MAGIC     --we can not expect the performance guarantees associated with delta lake and lakehouse 
 -- MAGIC
 -- MAGIC     --having a huge database tables, this can also cause perfromance issue 
 -- MAGIC
 -- MAGIC --solution 
--- MAGIC -- create a temp view 
+-- MAGIC -- create a temp view refering to external data source 
 -- MAGIC
 -- MAGIC   cerate a temp view temp_view_name(col_name1 col_type1,...)
 -- MAGIC     using data_source 
@@ -123,10 +123,7 @@
 
 -- COMMAND ----------
 
--- MAGIC
--- MAGIC %run "/Repos/sunitadhankhar@my.unt.edu/DataScience/Myfolder/Includes/Copy-Datasets"
--- MAGIC
--- MAGIC
+-- MAGIC %run ./Includes/Copy-Datasets
 
 -- COMMAND ----------
 
@@ -286,7 +283,7 @@ REFRESH TABLE books_csv
 
 SELECT COUNT(*) FROM books_csv
 
-
+-- for large dataset , it can take significant amount of time 
 
 
 -- COMMAND ----------
@@ -295,6 +292,8 @@ SELECT COUNT(*) FROM books_csv
 -- MAGIC ## CTAS Statements
 
 -- COMMAND ----------
+
+-- Create delta table 
 
 CREATE TABLE customers AS
 SELECT * FROM json.`${dataset.bookstore}/customers-json`;

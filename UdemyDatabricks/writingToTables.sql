@@ -1,5 +1,5 @@
 -- Databricks notebook source
--- MAGIC %run "/Repos/sunitadhankhar@my.unt.edu/DataScience/Myfolder/Includes/Copy-Datasets"
+-- MAGIC %run "./Includes/Copy-Datasets"
 -- MAGIC
 -- MAGIC
 -- MAGIC
@@ -11,7 +11,7 @@
 
 -- COMMAND ----------
 
-create table orders as 
+create or replace table orders as 
 
 select * from parquet.`${dataset.bookstore}/orders`
 
@@ -60,7 +60,7 @@ select * from parquet.`${dataset.bookstore}/orders`
 
 --Diff from Create or Replace 
 --DIff
---it can only overwrite existing table 
+--it can only overwrite existing table . can't creat a new one 
 
 --it can overwrite only the new records that match the current table schema, which means it is safer technique for overwriting an existing 
 --table without the risk of modifying the table schema 
@@ -81,7 +81,7 @@ from parquet.`{dataset.bookstore}/orders`
 -- MAGIC
 -- MAGIC as expected we got error 
 -- MAGIC
--- MAGIC -- we can add new column to the table while running Insert overwrite command
+-- MAGIC -- we can not add new column to the table while running Insert overwrite command
 
 -- COMMAND ----------
 
@@ -109,6 +109,9 @@ select count(*) from orders
 -- COMMAND ----------
 
 -- To resolve this issue ,we can use Merge operation 
+--In merge operation , updates, insert and deletes are completed in a single atomoc transaction 
+
+--in addition , merge operation is a great solution for avoiding duplicates when inserting records. 
 
 Create or replace temp view customers_updates as 
 select * from json.`${dataset.bookstore}/customers-json-new`;
@@ -157,7 +160,7 @@ insert *
 
 -- COMMAND ----------
 
---Mani advantage of merge operation is to avoid duplicates 
+--Main advantage of merge operation is to avoid duplicates 
 
 -- COMMAND ----------
 
